@@ -1,0 +1,7 @@
+Jones 786 Cooper Arlington Texas 76019 12345 student
+Smith 921 Bowen Arlington Texas 76006 65489 faculty
+Barker 621 Lancaster FortWorth Texas 76090 54367 student
+Callan 978 Lowe Dallas Texas 75009 98712 faculty
+Willis 123 King Tulas Oklahoma 56909 25968 government
+James 109 Baker Dallas Texas 75010 73674 faculty
+Parsons 4523 Azalea Burleson Texas 76134 26789 government

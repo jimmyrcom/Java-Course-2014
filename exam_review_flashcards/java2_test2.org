@@ -1,0 +1,1070 @@
+
+Q: Create a new jlabel called myLabel with the value "Enter Name: "
+A: JLabel myLabel = new JLabel("Enter Name");
+
+---
+
+Q: What is the first line for defining MyGUI, a class that is a child of JFrame
+A: public class MyGUI extends JFrame
+
+---
+
+Q: Create a 20 character textfield and put it into variable called foobar.
+A: JTextField foobar = new JTextField(20);
+
+---
+
+Q: What do you have to write at the very top of your file to use ArrayList? 
+A: import java.util.ArrayList;
+
+---
+
+Q: What do you have to write at the very top of your file to use Scanner? 
+A: import java.util.Scanner;
+
+---
+
+Q: What do you have to write at the very top of your file to use Formatter? 
+A: import java.util.Formatter;
+
+---
+
+Q: What would you write to set a GridLayout of 3 horizontal rows by 2 vertical columns.
+A: setLayout(new GridLayout(3, 2));
+
+---
+
+Q: What do you write to ensure that your JFrame closes whenever the corner [X] button on the window is clicked.
+A: setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+--- 
+
+Q: What do you write to ensure your JFrame is visible?
+A: setVisible(true);
+
+---
+
+Q: What do you write to center your JFrame when it appears?
+A: setLocationRelativeTo(null);
+                                                
+---
+
+Q: You have a button in the variable name "button". Add an action listener to button that outputs println("Clicked!")
+A:
+button.addActionListener(new ActionListener()
+{
+  public void actionPerformed(ActionEvent e)
+  {
+    System.out.println("Clicked!");
+  }
+});
+
+---
+
+Q: Write a for loop that traverses a String array in variable "list" backwards. Use i as the counter variable. use Println on each item.
+A:
+for (int i = list.length - 1; i >= 0; i--)
+{
+  System.out.println(list[i]);
+}
+
+So lets say there's 10 elements. i starts at 10, but arrays start at 0 instead of 1, so we say list.length -1. Then we loop from 9 to 0 taking away 1 each time.
+
+It may be easier to do it like this:
+
+int i = list.length;
+while (i-- > 0){
+        System.out.println(list[i]);
+}
+
+---
+
+Q: Create a dialog box that asks the user if they want soda. Put the output into a variable called response.
+A: int response = JOptionPane.showConfirmDialog(null, "Would you like a soda?", "Some Title", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+---
+
+Q: How would you customize the yes/no options in a showConfirmDialog
+A:
+// Custom answers
+Object[] options = {"Yes, please", "No way!"};
+// showOptionDialog
+int n = JOptionPane.showOptionDialog(null,
+    "The question: Do you like potato?",
+    "A question title",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.QUESTION_MESSAGE,
+    null,     //do not use a custom Icon
+    options,  //the titles of buttons
+    options[0]); //default button title
+---
+
+Q: In the following code, what does handler have to be?
+textField1.addActionListener(handler);
+A: handler is a Class that implements ActionListener
+
+---
+
+Q: How do you create a new checkbox called foobar with value foobar in your GUI?
+A: JCheckBox foobar = new JCheckBox("foobar");
+
+---
+
+Q: What is the terminology for adding and executing an event listener.
+A: Event Handlers are registered in a listenerList in the Object. Events are invoked and an event handler may be dispatched depending on the event type. There can be many events tied to each GUI component.
+
+---
+
+Q: What is the difference between a JFrame and a JPanel?
+A: A JFrame is the window itself. It can be resized and maximized. It has a title and border. JPanel is just used to group multiple items into one container. A common use is to group radio buttons together in the same section of the screen. Your GUI must have a JFrame but JPanels are optional. Your main class will usually extend JFrame.
+
+---
+
+Q:  What are some message dialog types.
+A: 
+JOptionPane.ERROR_MESSAGE: Indicates an error.
+JOptionPane.INFORMATION_MESSAGE: Indicates an informational message.
+JOptionPane.WARNING_MESSAGE: Warns of a potential problem.
+JOptionPane.QUESTION_MESSAGE: Poses a question. This dialog normally requires a response, such as clicking a Yes or a No button.
+JOptionPane.PLAIN_MESSAGE: A dialog that contains a message, but no icon.
+
+---
+
+Q: What is the hierarchy of most Swing components?
+A: Object > Component > Container > JComponent
+
+---
+
+Q: You have the response of a showConfirmDialog, compare it to see if their answer was Yes Option, if so, print "Yes"
+A:
+if (response == JOptionPane.YES_OPTION)
+{
+    System.out.println("Yes"); 
+};
+
+---
+
+Q: There is a String variable called filename and a String variable called data. Write data to a file using Formatter.
+A:
+try
+{
+        Formatter out = new Formatter(filename);
+        out.format("%s", data);
+        out.close();
+}
+catch (IOException e)
+{
+  System.err.println("Error opening file.");
+}
+
+---
+
+Q: What do you need to import to use swing components?
+A: import javax.swing.*;
+
+---
+
+Q: What do you need to import to use layouts like FlowLayout?
+A:
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+---
+
+Q: Clear the text of a JTextField called foobar
+A: foobar.setText("");
+
+---
+
+Q: What imports do you need for File, FileNotFoundException and IOException.
+A: 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+---
+
+Q: What imports do you need to add event listeners like ActionEvent, WindowEvent and ActionListener?
+A:
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+
+---
+
+Q: Create a new scanner and put it into the variable input. Make it read "employees.txt".
+A: 
+Scanner input = new Scanner(new File("employees.txt"));
+
+---
+
+Q: Create a new scanner and put it into the variable input. Make it read from standard input
+A: 
+Scanner input = new Scanner(System.in);
+
+---
+
+Q: There is an String Array with the values {"Red", "Green", "Blue"} in a variable called foobar, how do you get the value "Blue"
+A: foobar[2];
+
+---
+
+Q: String foobar = "123". Turn this into an Integer
+A: Integer.parseInt(foobar)
+
+---
+
+Q: Create a message dialog that says "Hello!"
+A: 
+JOptionPane.showMessageDialog(null, "Hello!");
+
+---
+
+Q: Create an enum type called customerType that has the values: student, faculty, government
+A: 
+public enum CustomerType
+{
+  STUDENT, FACULTY, GOVERNMENT
+};
+
+---
+
+Q: Create a new array list of Customer called foobar.
+A: ArrayList<Customer> foobar = new ArrayList<Customer>();
+
+---
+
+Q: CustomerType is an enum
+
+public enum CustomerType
+{
+  STUDENT, FACULTY, GOVERNMENT
+};
+
+Create a new CustomerType called foobar with the value student.
+
+A: CustomerType foobar = CustomerType.STUDENT;
+
+---
+
+Q: Write a main function with nothing in it
+A: 
+public static void main(String[] arr)
+{
+}
+
+---
+
+Q: How do you split a string called foobar by space.
+A: foobar.split(" ")
+
+---
+
+Q: Create a new combobox called combo with the String array of colors: red, green, blue. Add it to the jframe
+A:
+String[] colors = {"Red", "Green", "Blue"};
+JComboBox<String> combo = new JComboBox<String>(colors);
+add(combo);
+
+---
+
+Q: How do you set the size of your jframe to 300 x 200.
+A: setSize(300, 200);
+
+---
+
+Q: What's the default layout for JPanel and JFrame?
+A:
+Each JPanel object is initialized to use a FlowLayout, unless you 
+specify differently when creating the JPanel. Content 
+panes like JFrame use BorderLayout by default.
+
+---
+
+Q: What is the difference between flowlayout and borderlayout and gridlayout?
+A:
+Flow layout arranges components in directional flow based on the container.
+  It arranges items in until it runs out of space either left to right or right to left
+  eg ComponentOrientation.LEFT_TO_RIGHT or ComponentOrientation.RIGHT_TO_LEFT
+  FlowLayout is the default layout.
+A border layout lays out a container, arranging and resizing its components to fit
+  in five regions: north, south, east, west, and center. Each region may contain no
+  more than one component, and is identified by a corresponding constant: 
+  NORTH, SOUTH, EAST, WEST, and CENTER. p.setLayout(new BorderLayout());
+  p.add(new Button("Okay"), BorderLayout.SOUTH);
+The GridLayout class is a layout manager that lays out a container's components in
+  a rectangular grid. The container is divided into equal-sized rectangles, and one 
+  component is placed in each rectangle.
+
+---
+
+Q: Create a new button with the text "submit" and put it in the variable called button
+A:
+JButton button = new JButton("Submit");
+
+---
+
+Q: Create two radiobuttons with values "button 1" and "button 2". Add them to a button group and a panel. Then add the panel to your jframe.
+A: 
+JRadioButton radio1 = new JRadioButton("Radio Button 1");
+JRadioButton radio2 = new JRadioButton("Radio Button 2");
+
+ButtonGroup group = new ButtonGroup();
+JPanel frame = new JPanel();
+
+group.add(radio1);
+frame.add(radio1);
+			
+group.add(radio2);
+frame.add(radio2);
+			
+add(frame);
+
+---
+
+Q: You have a Formatter object in a variable called fmt and a Double in a variable called dbl. Use format on dbl and make it only display up to 2 decimal points.
+A: fmt.format("%.2f",dbl);
+
+---
+
+Q: You have an event "e", how do print the stack?
+A: e.printStackTrace();
+
+---
+
+Q: You have an ArrayList of customer called customerList. Use an enhanced for loop to println each customer.
+A:
+for (Customer c: customerList){
+      System.out.println(c);
+}
+
+---
+
+Q: You have a scanner called input. Make a loop that receives input until the user types "finish"
+A:
+
+while (true)
+{
+  String userInput = input.nextLine();
+  if (userInput.equals("finish")) 
+    break;
+}
+
+---
+
+Q: You are a Person with a firstName Bob and lastName Barker. You were born in a Hospital. Write this in Java
+A: 
+//this file is Person.java
+public class Person {
+  public String firstName = "";
+  public String lastName = "";
+
+  public Person (String firstName, String lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;      
+  }
+}
+
+// this is Hospital.java
+public class Hospital {
+  public static void main(String[] args)
+  {
+    // A new instance of Person!
+    Person bob = new Person ("Bob", "Barker");
+  }
+}
+
+--- 
+
+Q: Make me a GUI that just has a label named "Enter Name", and a textfield next to it. Use gridlayout.
+A: 
+public class CourseGui extends JFrame
+{
+    JLabel nameLabel = new JLabel("Enter Name");
+    JTextField nameText = new JTextField(20);
+
+    public CourseGui(String name)
+    {
+        super(name);
+        setLayout(new GridLayout(1, 2));
+
+        add(nameLabel);
+        add(nameText);
+
+        // when you click X in corner, it will close frame
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // sets size of GUI
+        setSize(400, 150);
+        // makes GUI visible
+        setVisible(true);
+        // centers the GUI
+        setLocationRelativeTo(null);
+    }
+}
+
+// to use it just do
+// new CourseGui("Course GUI");
+
+---
+
+Q: You have the following enum type
+
+public enum CustomerType
+{
+  STUDENT, FACULTY, GOVERNMENT
+};
+
+You also have a string called "student" in variable foobar.
+How do you turn foobar into a CustomerType?
+
+A:
+CustomerType newType =  CustomerType.valueOf((foobar.toUpperCase()));
+
+OR
+
+if (foobar.equals("government"))
+    CustomerType newType = CustomerType.GOVERNMENT;
+else if (foobar.equals("faculty"))
+    CustomerType newType =CustomerType.FACULTY;
+else
+    CustomerType newType =CustomerType.STUDENT;
+
+---
+
+Q: Create a new exception called CustomerNotEnrolledException
+A:
+public class CustomerNotEnrolledException extends Exception {
+    CustomerNotEnrolledException(String message) {
+        super(message);
+    }
+    CustomerNotEnrolledException() {
+        super();
+    }
+}
+
+---
+
+Q: What is the JOptionPane constant used to indicate you're asking a question?
+A: JOptionPane.QUESTION_MESSAGE
+
+---
+
+Q: What's the purpose of adding radioButtons to a buttongroup?
+A: Selecting a radioButton should deselect the other radioButtons in its group.
+So for example you're either Male or Female. You cannot be both. Mostly.
+The values are mutually exclusive.
+
+---
+
+Q: What function do you use to set a tooltip that says "Hello" on a textfield called foobar?
+A: foobar.setToolTipText("Hello");
+
+---
+
+Q: Why would you make a method static?
+A: So you can access it without creating a new instance of the class.
+For example if I want to use the math function in Math I rather say
+
+Math.max(1,2);
+
+rather than
+
+Math m = new Math();
+m.max(1,2);
+
+However, if lets say we have a class called Person.
+If I use Person.getFirstName(), it's only really meaningful if I ask
+an individual person rather than humanity itself. A class is like a blueprint.
+Some methods depend on instances of the class, like an instance of a Person.
+You and I are separate instances of Person with unique fields and methods.
+
+---
+
+Q: How would you throw a CustomerNotEnrolledException?
+A: throw new CustomerNotEnrolledException();
+
+---
+
+Q: How would you indicate that the method createInvoice, which returns a String, can possibly throw a CustomerNotEnrolledException?
+A: public String createInvoice() throws CustomerNotEnrolledException
+
+---
+
+Q: How do you get the size of the ArrayList foobar?
+A: foobar.size();
+
+---
+
+Q: How do you get the size of the String foobar?
+A: foobar.length();
+
+---
+
+Q: How do you get the size of the Array foobar?
+A: foobar.length;
+
+---
+
+Q: How do you determine if a Scanner called input has more data to read?
+A: input.hasNext();
+
+---
+
+Q: How do you reset a comboBox selection?
+A: comboBox.setSelectedIndex(0);
+
+---
+
+Q: How do you reset a buttonGroup selection?
+A: buttonGroup.clearSelection();
+
+---
+
+Q: You have a textField called name. How do you set the cursor focus on it?
+A: name.requestFocusInWindow();
+
+---
+
+Q: How do you determine if JRadioButton is selected?
+A: button.isSelected();
+
+---
+
+Q: How do you get the selected value from comboBox?
+A: comboBox.getSelectedItem();
+
+---
+
+Q: How do you kill java from anywhere inside the program?
+A: System.exit(0);
+
+---
+
+Q: How do you compare String foobar to see if it equals cow or dog?
+A: 
+if (foobar.equals("cow") || foobar.equals("dog")){
+
+}
+
+---
+
+Q: How do you disable a textfield called foobar?
+A: foobar.setEditable(false);
+
+---
+
+Q: How do you check if Object foobar is actually a ButtonGroup class?
+A: if (foobar instanceof ButtonGroup) ...
+
+---
+
+Q:
+
+public class Customer{
+ public String name; 
+ public ArrayList<Course> courseList;
+}
+
+You have an ArrayList of Customer called customerList.
+
+Make a function addCourse that takes a name, a Course and a courseList.
+This function will search courseList for the customer with a matching name and
+then add the Course to the customer's courseList field.
+
+A: 
+public void addCourse(String name, Course course, ArrayList<Course> customerList)
+{
+    for(Customer c : customerList){
+        if (c.name.equals(name)){
+            c.courseList.add(course);
+            return;
+        }
+    }
+}
+
+Not that she will probably use c.getName().equals because all her stuff has getters/setters.
+
+---
+
+Q: Loop over an array of string foobar and print the values.
+A: 
+for (int i = 0; i < foobar.length; i++)
+{
+  System.out.println(foobar[i]);
+}
+
+---
+
+Q: Loop through a String array called foobar backwards and print the values.
+A:
+for (int i = foobar.length - 1; i >= 0; i--)
+{
+  System.out.println(foobar[i]);
+}
+
+---
+
+Q: What does super(name); do when extending a JFrame.
+A: Gives the JFrame a title you can see at the very top. 
+
+---
+
+Q: In order for a file to get written, you must ________ the file.
+A: close.
+
+---
+
+Q: What use is super?
+A: Super is used to access the parent of the class.
+For example super() in the constructor can be used to call the parents constructor.
+If you use it in the constructor, it must be the very first thing in the constructor.
+
+Super can also be used to access methods that have been overridden. For example,
+super.calculateCharge()
+
+---
+
+Q: Why do we use the "this" keyword.
+A: "this" refers to the current class you're in. You can use it anywhere in the class.
+It's often used to disambiguate between the fields in the class and the arguments in a method when both variables have the same name.
+
+---
+
+Q: String foobar has the value "Bob 1 2". Split the string and create a new Student. Student has
+the constructor Student(String name, int id, double grade)
+
+A: 
+String[] arr = foobar.split(" ");
+Student s = new Student(arr[0], Integer.parseInt(arr[1]), Double.parseDouble(arr[2]));
+
+---
+
+Q: How do you set the row count you see when you click a comboBox?
+A: comboBox.setMaximumRowCount(3);
+
+---
+
+Q: What set of imports would give you most functionality when you have to start building a GUI?
+A: 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+---
+
+Q: Use setLayout to create a FlowLayout
+A: setLayout(new FlowLayout());
+
+---
+
+Q: What is the first line declaring the Customer class if it uses the interface Invoice
+A: public class Customer implements Invoice
+
+---
+
+Q: What is the first line declaring the Hospital class if it uses the interface Invoice, and is an abstract class.
+A: public abstract class Hospital implements Invoice
+
+---
+
+Q: Person is an abstract class. What is it called when I declare
+Person Jimmy = new Person();
+A: An error. You cannot create an instance of an abstract class.
+
+---
+
+Q: Doctor is a subclass of Person. If I say
+Doctor house = new Doctor();
+
+Can I pass it to a function whose signature is:
+myFunction (Person person)
+
+A: Yes you can. Person is the superclass of Doctor. You can always pass in a subclass into a function that takes it's superclass. For example Object is the superclass of all classes. Object has no superclass. You can pass in anything except primitive types to a function that takes Object as a parameter.
+
+---
+
+Q: 
+You created a math class.
+
+public class MyMath {
+  public int add(int x, int y)
+  {
+    return x+y;
+  }
+}
+
+Can you now use it from another class by using "MyMath.add(1,2)"
+
+A: No you cannot. The method must be static if you want to use it like this: "MyMath.someMethod".
+If it is not static, you can only use the method if you make an instance of that class. Eg:
+MyMath m = new MyMath();
+m.add(1,2);
+
+---
+
+Q: Write the try catch you would use when dealing with files.
+A: 
+try
+{
+  // Try file operations with classes like File, Scanner, Formatter
+}
+catch (IOException e)
+{ 
+  e.printStackTrace();
+  System.err.println("Error opening file.");
+}
+
+---
+
+Q: You have "input" which is a Scanner Object. How would you get the next line of text the user enters?
+A: input.nextLine();
+
+---
+
+Q: You have "input" which is a Scanner Object. How would you get the next integer the user enters?
+A: input.nextInt();
+
+---
+
+Q: What is the exception that is thrown when a file cannot be found?
+A: FileNotFoundException. Try to use IOException in your try/catch statement instead.
+
+---
+
+Q: Why will the compiler complain if you do something like this?
+
+Scanner input = new Scanner(System.in);
+String str = input.nextLine();
+if (str.equals("foo"))
+   String newStr = "oof";
+else if (str.equals("bar"))
+   String newStr = "rab";
+
+System.out.println(newstr);
+
+A: Because String newStr might not exist if you enter something other than foo or bar.
+
+---
+
+Q: What is wrong with this?
+
+if (firstName == "John")
+   System.out.println("Hi John");
+
+A: You should only compare Strings like this: firstName.equals("John"). "==" compares object references, not values.
+
+---
+
+Q: Strings are immutable. What does that mean. Why are they immutable?
+A: Immutable means they do not change. That means if you try to modify a String you create a new copy instead of modifying the original. This means that String references that have the same value can share the same memory address without worrying about the value changing. Immutability also makes concurrent programming easier.
+
+---
+
+Q: Does this need a try/catch?
+Scanner input = new Scanner(System.in);
+A: No, it only needs a try/catch if you're passing a file to scanner.
+
+---
+
+Q: Make a 10x15 JTextArea called foobar that says "hello". Add it to the jframe with a scrollbar.
+A: 
+JTextArea foobar = new JTextArea("hello", 10, 15);
+add(new JScrollPane(foobar));
+
+---
+
+Q: What is an ActionListener?
+A: An interface used for events.
+
+---
+
+Q: What must ActionListener implement.
+A: A method called actionPerformed that takes one argument ActionEvent.
+
+---
+
+Q: What is an anonymous class?
+A: A class that does not have a name. We use it to pass in handlers for events. The downside about using an anonymous class like an implementation ActionListener is that you can only use it one time.
+
+This is what an anonymous class that implements ActionListener looks like
+new ActionListener()
+{
+  public void actionPerformed(ActionEvent e)
+  {
+    System.out.println("Clicked!");
+  }
+}
+
+---
+
+Q: How many sections does border layout have to place things?
+A: 5 sections 
+BorderLayout.NORTH
+BorderLayout.SOUTH
+BorderLayout.EAST
+BorderLayout.WEST
+BorderLayout.CENTER
+
+You can use it like this:
+add(new Button("Center"), BorderLayout.CENTER)
+
+
+---
+
+Q: Write me the main to make a GUI. The JFrame child is in a class called Foobar. Make it 260 x 180.
+A: 
+public static void main(String[] arr)
+{
+  // Foobar is some class that extends JFrame and has widgets
+    Foobar foobar = new Foobar();
+    foobar.setLayout(new FlowLayout());
+    foobar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    foobar.setSize(260, 180);
+    foobar.setVisible(true);
+    foobar.setLocationRelativeTo(null);
+}
+
+---
+
+Q: Make a writeFile method that writes this data to "payrecords.txt" using Formatter:
+Jones;Arlington;750.888
+Joe;Arlington;750.123
+Jonas;Arlington;750.111
+
+The format is name, city, pay. Make pay only 2 decimal points. Use three format method calls.
+
+A: 
+public void writeFile()
+{
+    Formatter output;
+    try
+    {
+            output = new Formatter("payrecords.txt");
+            output.format("%s;%s;%.2f\n\r", "Jones", "Arlington", 750);
+            output.format("%s;%s;%.2f\n\r", "Joe", "Arlington", 750);
+            output.format("%s;%s;%.2f\n\r", "Jonas", "Arlington", 750);
+            output.close();
+    }
+    catch(IOException ioe)
+    {
+            ioe.printStackTrace();
+    }
+}
+
+---
+
+Q: What exceptions do you catch on files?
+A: IOException
+
+---
+
+Q: What do I use to write to a file. What do we do to read from a file?
+A: Formatter to write. Scanner to read.
+
+---
+
+Q: make a readFile method that opens "payrecords.txt". Counts the number of employees, and prints out each of their values.
+payrecords.txt looks like this:
+Jones;Arlington;750.888
+Joe;Arlington;750.123
+Jonas;Arlington;750.111
+A: 
+public void readFile()
+{
+    Scanner input;
+    String values[];
+    int counter=0;
+    String line;
+
+    try
+        {
+            input = new Scanner(new File("payrecords.txt"));
+            while (input.hasNext())
+                {
+                    line = input.nextLine();
+                    values = line.split(";");
+                    for (String s : values)
+                        System.out.println(s + " ");
+                    counter++;
+                }
+            System.out.println(counter);
+        } catch (IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+}
+
+
+---
+
+Q:
+I have the following methods:
+
+public int foo (A)
+{
+  return A*3;
+}
+
+public int bar (A)
+{
+  return A-2;
+}
+
+What is the result of the expression
+foo(bar(5)) ?
+
+A: You read this from the inside out.
+
+So    bar(5) => return 5-2; => 3. Three is the output. Three is passed into foo.
+then  foo(3) => return A*3; => 9. Nine is the result of the expression.
+
+---
+
+Q: Doctor extends Person. If I have an instance of person, can I pass it into a function that takes Doctor as a type?
+A: Think about this. Could you take any Person and let them be a Doctor? That's not a good idea. You can take any Doctor and put them in a position that just requires a Person. Person is the superclass. Doctor is the subclass. All Doctors are people but not all People are doctors.
+
+---
+
+Q: How many layouts can each container have?
+A: Just one.
+
+---
+
+Q: How do you modify a FlowLayout's alignment?
+A: 
+setAlignment method: 
+
+FlowLayout flow = new FlowLayout();
+flow.setAlignment(FlowLayout.LEFT);
+
+You can also put alignments in the constructor
+FlowLayout flow = FlowLayout(FlowLayout.RIGHT);
+
+---
+
+Q: When you add something to BorderLayout without specifying where it goes,
+ where is that Component placed?
+A: The CENTER
+
+---
+
+Q: What's the java synonym for application appearance and user experience?
+A: The applications look and feel.
+
+---
+
+Q: What are we using from JOptionPane?
+A: 
+We use message boxes that popup. For example:
+// Show an alert
+JOptionPane.showMessageDialog(null, "Message")
+// Ask yes or no
+JOptionPane.showConfirmDialog(null, "Yes or No?")
+// Ask the user to type something in
+JOptionPane.showInputDialog(null, "Type something in");
+
+Instead of null you can pass in a Component the popup refers to.
+
+---
+
+Q: How do you get the value from a JTextField called foobar.
+A: foobar.getText();
+
+---
+
+Q:
+You have a string array called foobar
+
+String[] foobar = {"Red", "Green", "Blue"}
+
+Create a combo box  using these values. Get the value from it, and set the selected value to green.
+A: 
+// creates a new combox box of type string using the foobar array to populate it
+JComboBox<String> combo = new JComboBox<String>(foobar);
+// someColor is "Red"
+Color someColor = combo.getSelectedItem();
+// set the selection to Green, element 1 in the array foobar.
+combo.setSelectedIndex(1);
+
+---
+
+Q: 
+What do you do to see if the integer foobar is greater than 50 but less than or equal to 100, and also that it's not 75.
+A:
+if (foobar > 50 && foobar <= 100 && foobar != 75) ...
+
+---
+
+Q: See if you can remember all the long method names.
+
+1. How do you make a GUI centered?
+
+2. How do you set it so the GUI closes when you click the [X] in the window corner.
+
+3. How do you set the tooltip text on a text field?
+
+4. Give me the method for resetting a combobox selection and getting it.
+
+5. Give me the method used to access the length of an array, arraylist and string.
+
+6. Make an confirm prompt and check if the response is yes or no.
+
+7. How do you clear a button group?
+
+8. How do you set focus on a JTextField called textField.
+
+A: 
+1. How do you make a GUI centered?
+setLocationRelativeTo(null);
+
+2. How do you set it so the GUI closes when you click the [X] in the window corner.
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+3. How do you set the tooltip text on a text field?
+textField.setToolTipText("Hello");
+
+4. Give me the method for resetting a combobox selection and getting it.
+comboBox.setSelectedIndex(0);
+comboBox.getSelectedItem();
+
+5. Give me the method used to access the length of an array, arraylist and string.
+array = String[] = x.length
+ArrayList = x.size()
+String = x.length()
+
+6. Make an confirm prompt and check if the response is yes or no.
+int response = JOptionPane.showConfirmDialog(null, "Would you like a soda?");
+if (response == JOptionPane.YES_OPTION)
+{
+    System.out.println("Yes"); 
+};
+else if (response == JOptionPane.NO_OPTION){
+    System.out.println("Yes"); 
+}
+
+7.  How do you clear a button group?
+button.clearSelection()
+
+8. How do you set focus on a JTextField called textField.
+textField.requestFocusInWindow();
+
+---
+
+Q: Show me how you create a new Formatter that writes "file.txt", Show me how you'd make a new scanner that reads "file.txt". Show me how you'd make a scanner to read user input. Just the new Scanner(...) and new Formatter(...) part. 
+
+A: 
+Formatter myFormat = new Formatter("file.txt");
+Scanner myScanner = new Scanner(new File("file.txt"));
+Scanner myScanner = new Scanner(System.in);
+
+---
+
+Q: How do you add a event that triggers when a window closes?
+A: 
+addWindowListener(new WindowAdapter()
+{
+  public void windowClosing(WindowEvent winEvt)
+  {
+    // Do stuff here
+  }
+}

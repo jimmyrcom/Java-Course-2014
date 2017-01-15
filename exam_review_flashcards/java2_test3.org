@@ -1,0 +1,543 @@
+Q: How do you check if a textfield called foobar that should have text is valid?
+A: 
+if (foobar.getText().isEmpty()) ...
+
+---
+
+Q: write a method called someMethod that checks if a textField called foobar has
+text and the text is an integer. someMethod returns true or false.
+A: 
+	public Boolean someMethod(JTextField foobar)
+	{
+		try
+		{
+			Integer.parseInt(foobar.getText());
+			return true;
+		} catch (Exception e)
+		{
+			return false;
+		}
+	}
+
+---
+
+Q: Why is it called a ser file?
+A: It stands for serializable.
+
+---
+
+Q: Show me a class declaration of "Customer", a class that can be
+serialized, and also implements Invoice.
+A: public class Customer implements Invoice, Serializable
+
+---
+
+Q: What types do you add to JDesktopPane()? 
+a) JMenuPotato
+b) JMenu
+c) JInternalFrame
+d) JMenuItem
+
+A: 
+In our assignment JInternalFrame is added to JDesktopPane
+
+---
+
+Q: You have a button in the variable name "button". Add an action listener to button that outputs println("Clicked!")
+A:
+button.addActionListener(new ActionListener()
+{
+  public void actionPerformed(ActionEvent e)
+  {
+    System.out.println("Clicked!");
+  }
+});
+
+---
+
+Q: Create a new menu bar with a menu item that contains "open" and "save", and add it to your GUI.
+Pretend you're in the GUI's constructor.
+
+A:
+    JMenuBar bar = new JMenuBar();
+    JMenu fileMenu = new JMenu("File");
+    JMenuItem openItem = new JMenuItem("Open");
+    JMenuItem saveItem = new JMenuItem("Save");
+    fileMenu.add(openItem);
+    fileMenu.add(saveItem);
+    bar.add(fileMenu);
+    setJMenuBar(bar);
+
+---
+
+Q: Write a method called someMethod that takes an array list of Object and writes
+it to "object.ser".
+
+A: public void someMethod(ArrayList<Object> foobar)
+{
+	ObjectOutputStream output;
+	try
+	{
+		output = new ObjectOutputStream(new FileOutputStream("object.ser"));
+                for (Object o : foobar)
+                {
+                  output.writeObject(o);
+                }
+		
+	} catch (IOException ioe)
+	{
+		ioe.printStackTrace();
+	}
+}
+
+---
+
+Q: You have a "objects.ser" file. Make a method called someMethod
+that returns an array list of objects from the file.
+
+A: 
+public ArrayList<Object> someMethod()
+{
+	ObjectInputStream input;
+	ArrayList<Object> foobar = new ArrayList<Object>();
+		try
+	{
+		input = new ObjectInputStream(new FileInputStream("objects.ser"));
+		while (true)
+		{
+			Object o = (Object) input.readObject();
+			foobar.add(o);
+		}
+	} catch (ClassNotFoundException e)
+	{
+		// Cannot unserialize class in file
+		System.err.println("Bad Class");
+	} catch (EOFException e)
+	{
+		// no more data in .ser file
+	} catch (IOException e)
+	{
+		// could not open or read file
+		e.printStackTrace();
+	}
+	return foobar;
+}
+	
+---
+
+Q: Add an action listener to a menuItem called openItem. The action
+listener adds an internal frame with the title "open". Add a new
+JPanel to the internal frame.  Assume there is a JDesktopPane called
+theDesktop. Add internal frame to the JDesktopPane.
+
+A: 
+  openItem.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){
+       JInternalFrame frame = new JInternalFrame("Open", true, true,
+       true, true);
+       JPanel panel = new JPanel();
+       frame.add(panel);
+       frame.pack(); // fit the size of panel
+       theDesktop.add(frame);
+       frame.setVisible();
+    }
+  });
+
+---
+
+Q: What do you add to a JInternalFrame? What do you add a
+JInternalFrame to?
+A: You add a JPanel. We can extend the jpanel inside an inner private
+class or add them inline. Inside this JPanel we add widgets. You add
+the JInternalFrame to a JDesktopPane.
+
+---
+
+Q: List some common imports that will do just about everything you
+could need.
+A: 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+---
+
+Q: What method is used to add a JMenuBar called bar to a JFrame?
+A:
+setJMenuBar(bar)
+
+---
+
+Q: She wants you to write a ser file. Show me the object you have to
+create that will handle all writes.
+A: 
+ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("accounts.ser"));
+
+---
+
+Q: She wants you to read a ser file. Show me the object you have to
+create that will handle all reads.
+A: 
+ObjectInputStream input = new ObjectInputStream(new FileInputStream("accounts.ser"));
+
+---
+
+Q: How many methods do you have to add if your method implements Serializable?
+A: 0. If you add implements Serializable to your class declaration you do not
+have to add anything special.
+
+---
+
+Q: What does a 1d of String array look like?
+What does a 2d array of String look like?
+What does a 3d array of String look like?
+What does a 4d array of String look like?
+
+A:
+// 1d array
+String[] foobar = {"one", "two", "three"};  
+// 2d array
+String[][] foobar = {{"one", "two", "three"}, {"one", "two", "three"}, {"one", "two", "three"}};  
+// 3d array
+String[][][] foobar = {{{"one", "two", "three"}, {"one", "two","three"}}, {{"one", "two", "three"}, {"one", "two", "three"}}};  
+// 4d array
+String[][][][] foobar = {{{{"one", "two", "three"}, {"one","two","three"}}, {{"one", "two", "three"}, {"one", "two", "three"}}}, {{{"one", "two", "three"}, {"one", "two","three"}}, {{"one", "two","three"}, {"one", "two", "three"}}}}
+
+Just count the "[]" on the left side. On the right side I can basically copy and paste the previous dimension in between brackets {}.
+
+---
+
+Q: What is the difference between transient data and persistent data?
+A: Think ram vs hard drive. When you power off your computer whatever is in ram is gone, but whatever is in your hard drive remains there. The same thing applies to programs. Things you have in variables are in memory. Those values will disappear when you close the program. Values in ram are transient. They come and they go. Values you save to disk are persistent.
+
+---
+
+Q: What is meant by scope?
+A:  Any time you see "{ ... }" you have a scope. Whenever you declare a variable between curly braces it lives and dies between those curly braces most of the time. For example:
+
+if (true)
+{
+  int swag = 0;
+  // ...
+
+} // Once the program gets to this point swag will not exist.
+
+System.out.println(swag); // ERROR, SWAG does not exist.
+
+swag lives and dies within the scope (the curly braces) of the if statement. 
+
+---
+
+Q: Why would you save data to .ser files?
+A: So that when your program opens again all the work that was previously done is still saved and displayed.
+
+---
+
+Q: What character set does Java use?
+A: Unicode. Unicode typically uses 1 byte for english characters but can use more bytes for foreign characters.
+
+---
+
+Q: Give me some data types from smallest possible to largest?
+
+A: bit < byte < short < int < long 
+
+bit is the smallest unit and is either 0 or 1
+byte is 8 bits
+short is 2 bytes
+int is 4 bytes
+long is 8 bytes.
+
+---
+
+Q: How is a string represented as data.
+A: A string can be encoded as an array of bytes of unicode data.
+String "1" is not the same thing as int 1.
+
+int 1 is just the number 1 occupying 4 bytes in memory.
+String "1" corresponds to a reference to a place in memory storing an int with the length of the string and the string itself as a byte array of unicode characters. The first element of the byte array would be 49 which is 1 in unicode.
+
+---
+
+Q: What is a record, a field, a file, a record-key?
+A:
+A record is a collection of one or more fields related to the record. A record key is a field that lets you lookup a specific record. A file can have many records and you can lookup the record by its record key.
+
+A record is a collection of data related to one thing. For example a Person can be a record with a first name, last name and social security number. The social security number would be a record-key, because you can use it to lookup any record. A field is any property of a Person, like first name or last name. 
+
+Whenever you see record/fields, just think of a Class because it's the same thing except that we're dealing with entries in a file.
+
+---
+
+Q: Whenever you're passing data on the network or to the file system what type of streams are you typically using.
+A: byte streams.
+
+---
+
+Q: What's the difference between an absolute file path and a relative path?
+A: 
+Absolute path looks like this
+
+Windows: C:\MyDirectory\Drive\foobar.java
+better operating systems: /MyDirectory/Drive/foobar.java
+
+You're specifying EXACTLY where the file is when you use an absolute path.
+When you use a relative path you just pass in for example 
+
+// The file in the current directory
+new File("foo.bar");
+// This means previous directory
+new File("../foo.bar");
+// this means in the foobar directory in the current directory
+new File("foobar/foo.bar");
+// This means previous directory that has a directory called foobar
+new File("../foobar/foo.bar");
+
+Relative path typically uses wherever you started java from as the current path.
+IDEs typically use the project directory.
+
+---
+
+Q: Whenever you save a file in java where is the file saved?
+A: In the current working directory. Typically, wherever you started java from.
+
+---
+
+Q: If I serialize and instance of my class to a file what does that mean.
+A: Your class implements Serializable and I used ObjectOutputStream to save it to disk. I take an object that is currently in memory and turn it into a flat sequence of bytes and save it into a file. That is Serialization. The object in the file is said to be serialized.
+
+---
+
+Q: What is wrapping?
+A: Initializing stream objects with other stream objects in this manner is sometimes called wrapping—the new stream object being created wraps the stream object specified as a constructor argument. To wrap a FileInputStream in an ObjectInputStream , for instance, we pass the FileInputStream object to the ObjectInputStream ’s constructor.
+
+---
+
+Q: What interfaces do ObjectInputStream and ObjectOutputStream implement?
+A:  They respectively implement the ObjectInput and ObjectOutput interfaces which enable entire objects to be read from or written to a stream (possibly a file).
+
+---
+
+Q: What does it mean to write to a stream?
+A: Whenever you see stream just think input output. You're writing data to somewhere or reading it from somewhere. The stream may be a file or it may be the network. When you watch a youtube video you're streaming in data and from youtube's perspective they're streaming data out to you. You can use a stream to send data within your application, to write to a file, to read input from the user's keyboard, to serve a website over the internet or to write and read a file. Streams are just IO.
+
+---
+
+Q: What does truncated mean?
+A: deleted. Kind of.
+
+Truncted means shortened. In programming we use it to mean the information is deleted. For example if you try to cast a long which is 8 bytes to an int which is 4 bytes it will truncate (lose) 4 bytes of data in the conversion. 
+
+---
+
+Q: Formatter vs Scanner. Which one is output, which one is input.
+A:
+Scanner is input. We have used scanner to read from user keyboard input or read file input. We have used it so far in class to read text files only. We have not read binary.
+Formatter is output. We use it to output a file.
+
+---
+
+Q: When you open a file with Scanner, if you read some data and suddenly want to read data from the beginning of the file again, how do you do it?
+A: You don't. If it's a file you'd have to open it again. 
+
+---
+
+Q: Whenever you update a file what happens on the hard drive. Do only the parts of the file that changed get rewritten?
+A: Even if you change a single byte of data in a 2 terabyte file, the whole file gets rewritten to disk. The whole file is always updated.
+
+---
+    
+Q: How do you prevent instance variables from being serialized.
+A: Declare them as transient.
+
+---
+
+Q: With Scanner we have Scanner.hasNext() method to determine if a scanner instance has more data to read. How do we know when a ObjectInputStream runs out of data?
+A: It throws a EOFException exception.
+
+---
+
+Q: How do you add a JMenuBar to your JFrame
+A: setJMenuBar(bar);
+
+---
+
+Q: What are mnemonics in java?
+A: Quick keys you can set to your Java GUI elements for accessibility. Any AbstractButton can have a Mnemonic
+
+---
+
+Q: We use joptionpane to show message
+
+// Show an alert
+JOptionPane.showMessageDialog(null, "Message")
+// Ask yes or no
+JOptionPane.showConfirmDialog(null, "Yes or No?")
+// Ask the user to type something in
+JOptionPane.showInputDialog(null, "Type something in");
+
+What does the null mean?
+A: The null just says that the message box has no parent. You can assign a JFrame as the parent window. If that parent window is closed the message box will also close.
+
+---
+
+Q: I declare a new frame. What do all the "true"s stand for.
+JInternalFrame frame = new JInternalFrame("Open", true, true, true, true);
+
+A: resizable, closable, maximizable, minimizable
+
+---
+
+Q: ObjectOutputStream and ObjectInputStream use what methods.
+A:
+ObjectOutputStream uses writeObject(something);
+ObjectInputStream uses readObject()
+
+---
+
+Q: Show me an example of a transient variable.
+A: 
+class ClassMate implements Serializable {
+  private String firstName;
+  private transient String middleName;
+  private transient String lastName;
+}
+
+This is my data model for most classmates I meet. I remember their first name but not their middle or last name. My brain simply does not store this information, so we can say the information is transient. I only know their last name for a few minutes before I forget.
+
+---
+
+Q: Suppose you have class Foo which uses instances of the classes Bar and Baz in its fields. Foo implements Serializable but the others are not, can I save foo to disk?
+A: Bar and Baz must be serializable, if Foo is a subclass of something, that something also must implement Serializable. Sometimes you have to override the equals() and hashcode() but that's probably not going to be asked.
+
+---
+
+Q: Do static variables get saved when you serialize some object to disk?
+A: No. Serialization is intended for only instances of the class. You would have to write your own writeObject and readObject method within the class. Saving static variables is not default behavior.
+
+---
+
+Q: What is buffered IO and what is it for?
+A: Buffered IO is basically grabbing chunks of data into a block of memory then reading from that data. If you read data from the disk a few bytes at a time it would be horribly slow. The hard drive is thousands of times slower than the CPU so grabbing big chunks of data at a time can help reduce how long an application has to wait to continue running logic on the data. Instead of reading from disk in small chunks it grabs large chunks of data from an IO device and puts it into memory (the buffer) and reads from the buffer.
+
+---
+
+Q: If you have a ser file with multiple types written in it, what must your reader method cast them to?
+A: You don't have to cast them. The method returns an Object. You could cast them as (Object) but it would be redundant. Then use instanceof to figure out what each one is.
+
+---
+
+Q: What is casting?
+A: Lets say you have a function that returns an Object class but you know it's actually a Customer class. You can say
+Customer myCustomer = (Customer) someMethodThatReturnsAObject();
+
+This takes the return value of 'someMethodThatReturnsAObject' and "cast"s it to a Customer class type.
+
+---
+
+Q: What's the difference between itemlistener and action listener.
+A: item listener checks for state changes (select/unselect). actionlistener (only check if clicked or activated)
+
+---
+
+Q: What would an item listener that checks to see which of three radio buttons was selected look like?
+A: 
+class MyItemListener implements ItemListener
+{
+  public void itemStateChanged(ItemEvent ie)
+  {
+    if (firstBox.isSelected())
+      System.out.println("First");
+    else if (secondBox.isSelected())
+      System.out.println("Second");
+    else
+      System.out.println("Third");
+  }
+}
+
+//YOU WOULD ATTACH IT LIKE THIS
+MyItemListener myListener = new MyItemListener();
+firstBox.addItemListener(myListener);
+secondBox.addItemListener(myListener);
+thirdBox.addItemListener(myListener);
+
+
+---
+
+Q: What is it called when you add an item listener to a JComponent.
+A: Attaching the item listener
+
+---
+
+Q: You have a radiobutton called firstBox. Show me how to attach a listener the anonymous way and the reusable way.
+A: 
+    //Reusable way, myListener was declared somewhere else.
+    firstBox.addItemListener(myListener);
+
+    // Anonymous way
+    firstBox.addItemListener(new ItemListener()
+    {
+      public void itemStateChanged(ItemEvent ie)
+      {
+        System.out.println("First");
+      }
+    });
+
+---
+
+Q: Where do you declare, where do you create, and what does it mean?
+A: 
+You declare stuff usually right after you declare your class.
+JMenuBar bar;
+This means bar is a variable I made up of type JMenuBar.
+
+You create instances when you use 'new' and assign them to declared variables:
+You usually create inside your constructor!
+bar = new JMenuBar();
+
+You can declare and create at the same time.
+JMenuBar bar = new JMenuBar();
+
+---
+
+Q: We're required to validate a name text field and a id text field. What might the validate function look like.
+A:
+public boolean validate()
+    {
+      if (nameField.getText().isEmpty())
+      {
+        JOptionPane.showMessageDialog(null, "Enter name");
+        nameField.requestFocus();
+        return false;
+      }
+      else if (idField.getText().isEmpty())
+      {
+        JOptionPane.showMessageDialog(null, "Enter id");
+        idField.requestFocus();
+        return false;
+      }
+      else if (!idField.getText().isEmpty())
+      {
+        try
+        {
+          Integer.parseInt(idField.getText());
+          return true;
+        }
+        catch(NumberFormatException nfe)
+        {
+          JOptionPane.showMessageDialog(null, "Enter something");
+          idField.setText("");
+          idField.requestFocus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+// TO USE IT JUST ADD this to whatever button click handler needs validation
+
+if (!validate()) return;
+// the rest of your logic goes here.
+

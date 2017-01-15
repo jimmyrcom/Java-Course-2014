@@ -1,0 +1,628 @@
+
+Q: What import statement would you need to use the line:
+Statement statement = connection.createStatement();
+A:
+import java.sql.Statement;
+
+
+---
+
+
+Q: What import statement would you need to use the following code:
+try 
+{
+// Some sql statements
+}
+catch (SQLException sqlException)
+{
+}
+
+A:
+import java.sql.SQLException;
+
+---
+
+
+Q: What import statements would you need to use the line:
+ResultSetMetaData metaData = resultSet.getMetaData();
+
+A:
+import java.sql.ResultSetMetaData;
+
+resultSet would need
+import java.sql.ResultSet;
+
+---
+
+
+Q: What import statement would you need to use the line
+PreparedStatement addCustomer 
+   = connection.prepareStatement("INSERT INTO Customer (name, address, accountNumber, cType) VALUES (?,?,?,?)");
+
+A:
+import java.sql.PreparedStatement;
+
+
+---
+
+
+Q: What import statements would you need to use the line:
+Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+A:
+
+import java.sql.DriverManager;
+import java.sql.Connection;
+
+Connection for the left side of the equals and DriverManager for the right side
+
+---
+
+
+Q: Write a method "test" that connects to database "someDatabase". The
+user name is "someUser", the password is "somePass".
+
+A:
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public static void test(){
+  try {
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/someDatabase", "someUser", "somePass");
+  }
+  catch (SQLException e)
+  {
+    e.printStackTrace();
+  }
+}
+
+---
+
+Q:
+
+1. Make a prepared statement that selects everything from a table
+called Addresses selecting only the fields that have a certain last
+name.
+
+execute the prepared statement using the String "Smith".
+
+A: 
+try
+{
+  PreparedStatement selectPeopleByLastName 
+     = connection.prepareStatement("SELECT * FROM Addresses WHERE LastName = ?");
+  String someName = "Smith";
+  selectPeopleByLastName.setString(1, someName);
+  ResultSet resultSet = selectPeopleByLastName.executeQuery();
+}
+catch (SQLException e)
+{
+  e.printStackTrace();
+}
+
+---
+
+
+Q: What is JDBC
+A:
+The API java uses to connect java to the database, the point of it is you can use the same java code for any database you use. That's not necessarily true through because there's many differences between different databases and how they implement sql. They try to make it so it automatically discovers and uses the drivers you need.
+The Java Database Connectivity (JDBC) API is the industry standard for database-independent connectivity between the Java programming language and a wide range of databases  SQL databases and other tabular data sources, such as spreadsheets or flat files. The JDBC API provides a call-level API for SQL-based database access.
+
+---
+
+
+Q: How do you get everything from someTable in sql
+A: Select * from someTable;
+
+
+---
+
+
+Q: How do you get customerName from CustomerTable if phoneNumber = 911
+A: select customerName from customerTable where phoneNumber = 911;
+you can also use multiple things in the where clause
+
+select customerName from customerTable where phoneNumber = 911 and firstName = 'Bob';
+
+---
+
+
+Q: What database are we using
+a) SQL SERVER
+b) MySQL
+c) Sequel Server
+d) My Sequel Server
+
+A: b
+
+
+---
+
+Q: What's it called when you ask the db for information?
+A: Querying
+
+---
+
+Q: What is a primary key and foreign key.
+A: Primary key is a UNIQUE value that's identifies any one row. For example social security number would be a primary key for people in the united states, think entity integrity. If someone else steals social it's not a unique identifier anymore.
+A foreign key is a value that points to a primary key in some other table. For example canadian social security would be the primary key in the Canada but a foreign key in the united states.
+
+---
+
+Q: How do you combine data from multiple tables.
+A: Use joins. Be careful though, in database class / oracle, Join and inner join mean the same thing. In the java book they specifically only mention inner join. There are many types of join
+Refer to this picture
+http://www.codeproject.com/KB/database/Visual_SQL_Joins/Visual_SQL_JOINS_orig.jpg
+
+The syntax is JOIN someTable ON someTable.x = anotherTable.y
+remember JOIN .. ON  x=y
+
+---
+
+Q: * in SQL indicates.
+A: select all columns. 
+
+---
+
+Q: If we want only specific rows in the table for selection what would we use.
+A: select * from blah WHERE x=... and (y = ... or z = ...);
+
+---
+
+Q: How would you see if the user's first name starts with Derp in someTable
+A: select * from someTable where firstName like 'Derp%';
+
+---
+
+Q: How would you see if the user's first name ends with Derp in someTable
+A: select * from someTable where firstName like '%Derp';
+
+---
+
+Q: How would you see if the user's first name contains Derp in someTable
+A: select * from someTable where firstName like '%Derp%';
+
+---
+
+Q: How do you sort someTable by foo asc.
+A: select * from someTable order by foo;
+
+ASC is implied! You pretty much never have to write it.
+---
+
+Q: How do you sort someTable by foo desc.
+A: select * from someTable order by foo DESC;
+
+---
+
+Q: How do you sort someTable by foo desc, bar asc.
+A: select * from someTable order by foo DESC, bar ASC;
+
+---
+
+Q: Show me how you would insert data into a database.
+A: INSERT INTO someTable (firstName, lastName) values ('Bob', 'Barker');
+
+---
+
+Q: Show me how you would delete from the database.
+A: delete from someTable where firstName = 'Bob';
+
+---
+
+Q: How is mysql different from the sql standard.
+A: In real sql you use single quotes to quote strings. In mysql you can use single or double quotes. Mysql is also not case sensitive.
+
+---
+
+Q: How do you update someTable to set some number in the record relating to Bob?
+A: UPDATE someTable SET x=1, b=2, c=3 where firstName ='Bob';
+
+---
+
+Q: Use what imports to get all database functionality?
+A: import java.sql.*;
+
+---
+
+Q: When you get back a resultSet what is it pointing to.
+A: Nothing, it points to before the first row. It expects you to call resultSet.next().
+if that returns nothing that means there's no data in the table. It's because you will typically use a while loop
+
+while (resultSet.next())
+{
+  // .. do something with results
+}
+
+---
+
+Q: What is the RowSet interface?
+A: It prepares the database connection and query statements.
+
+A JDBC RowSet object holds tabular data in a way that makes it more flexible and easier to use than a result set.
+
+Oracle has defined five RowSet interfaces for some of the more popular uses of a RowSet, and standard reference are available for these RowSet interfaces. In this tutorial you will learn how to use these reference implementations.
+
+These versions of the RowSet interface and their implementations have been provided as a convenience for programmers. Programmers are free to write their own versions of the javax.sql.RowSet interface, to extend the implementations of the five RowSet interfaces, or to write their own implementations. However, many programmers will probably find that the standard reference implementations already fit their needs and will use them as is.
+
+---
+
+Q: When a prepared statement gets the results back do the results start at 0 or 1.
+A: Unlike most of java most database functions, you need to start getting results or setting results starting at 1, not 0.
+
+---
+
+Q: What method do you use if you want to execute a PreparedStatement and want a ResultSet back
+A: executeQuery
+
+---
+
+Q: What method do you use if you want to execute a PreparedStatement and want to see how many rows were affected only
+A: executeUpdate(). You would use this for DML statements.
+
+---
+
+Q: What is a stored procedure?
+A: When you use PreparedStatements sometimes it can be saved within the database for faster reuse. Normally when you write SQL, at runtime it will take your statement, parse it, and format it in a way the database can execute. By making stored procedures you avoid this overhead at runtime, instead it happens at compile time. Java uses the CallableStatement class for them.
+
+---
+
+Q: How do you save changes to any inserts, deletes and updates that you did recently? How do you undo them?
+A: commit; to save, rollback; to undo.
+
+---
+
+Q: What are transactions.
+A: Transactions aka atomic operations let you run a series of queries together. If anything fails or goes wrong it will undo everything that happened.
+
+---
+
+Q: What are the ? in PreparedStatements?
+eg
+
+addOnlineCourse = connection
+  .prepareStatement("INSERT INTO `Course` (`CourseType`, `title`, `instructor`, `price`, `cType`, "
+  + "`startDate`, `endDate`, `examProctor`, `video`, `numberOfChapters`)"
+  + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+A: Placeholders that you fill in like this:
+
+// this populates the first questionmark which corresponds to CourseType
+addOnlineCourse.setString(1, 'OnlineCourse');
+
+// this populates the second questionmark, which corresponds to title
+addOnlineCourse.setString(2, 'Java 2');
+
+// so far it's filled in these values:
+// VALUES ('OnlineCourse', 'Java 2', ?, ?, ?, ?, ?, ?, ?, ?)")
+// 1 and 2, refer to which question mark it's filling in.
+
+// we skipped third and filled in 4th, which is price
+addOnlineCourse.setInt(4, 50);
+// VALUES ('OnlineCourse', 'Java 2', ?, 50, ?, ?, ?, ?, ?, ?)")
+// sometimes I use setInt, or setDouble, or whatever the datatype needed
+// price is a int so we use setInt
+
+// .... MORE STUFF ...
+// ...
+
+// ONCE EVERY QUESTION MARK IS FILLED IN I CAN USE
+addOnlineCourse.executeUpdate()
+// I use executeUpdate because when I insert something I'm not really expecting anything back.
+// if I was wanting something back I'd use
+addOnlineCourse.executeQuery()
+
+---
+
+Q: Show me what your main database class should look like in general
+A:
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+public class DatabaseMethods
+{
+	private static final String URL = "jdbc:mysql://localhost/courses";
+	private static final String USERNAME = "cdavis";
+	private static final String PASSWORD = "fall2013";
+
+	public static Connection connection = null; // manages connection
+
+        // BELOW HERE YOU'LL HAVE ALL YOUR PREPARED STATMENTS
+        private static PreparedStatement getCustomer = null;
+
+	// constructor
+	public DatabaseMethods()
+	{
+		try
+		{
+                    // HERE IS WHERE YOU INITIALIZE YOUR DATABASE CONNECTION AND PREPARED STATMENTS
+                    
+                    // this connects to the database!!
+                    connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+                    // below you would have all your prepared statements you want to initialize
+		    getCustomer = connection
+		      .prepareStatement("SELECT id FROM Customer where name = ? OR accountNumber = ? limit 1");
+                }
+		catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		} // end catch
+         }
+
+         // after the constructor you have methods that populate your prepared statements.
+
+         // this one uses getCustomer preparedStatement and populates it
+	public static int customerExists(String name, int account)
+	{
+		try
+		{
+                        // POPULATE THE QUESTION MARKS
+			getCustomer.setString(1, name);
+			getCustomer.setInt(2, account);
+                        // BOTH QUESTION MARKS IN getCustomer above have been populated. Execute it!
+			ResultSet resultSet = getCustomer.executeQuery();
+                        // I point to the first row, and I get the column "id" from the record.
+			if (resultSet.next())
+				return resultSet.getInt("id");
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+
+        // IF SHE ASKS YOU TO DUMP OUT EVERYTHING IN YOUR TABLE USE THIS FUNCTION VERBATIM
+        // call it like this DatabaseMethods.showTable("someTable");
+	public static void showTable(String table)
+	{
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try
+		{
+			statement = connection.createStatement();
+			// all the code above will always be the same.
+			resultSet = statement.executeQuery("SELECT * FROM " + table);
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			int numberOfColumns = metaData.getColumnCount();
+			System.out.println("TABLE: " + table);
+			// COLUMN OF THE RESULT SET START AT 0 NOT 1.
+			for (int i = 1; i <= numberOfColumns; i++)
+			{
+				System.out.printf("%-30s\t", metaData.getColumnName(i));
+			}
+			System.out.println();
+			System.out.println();
+
+			while (resultSet.next())
+			{
+				for (int i = 1; i <= numberOfColumns; i++)
+				{
+				System.out.printf("%-30s\t", resultSet.getObject(i));
+				}
+				System.out.println();
+
+			}
+			System.out.println("\n\n");
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			try
+			{
+				resultSet.close();
+				statement.close();
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}
+
+---
+
+Q: What would it look like if you want to populate an ArrayList of student from the database?
+
+CREATE TABLE STUDENT (
+  id int PRIMARY KEY,
+  name varchar(50)
+)
+
+A: 
+PreparedStatement getStudents
+   = connection.prepareStatement("SELECT * FROM STUDENT");
+ArrayList<Student> foobar = new ArrayList<Student>;
+
+ResultSet results = getStudents.executeQuery();
+
+while (results.next())
+{
+  // assume Student has a constructor Student(int id, String name);
+  Student s = new Student(results.getInt("id"), results.getString("name"));
+  foobar.add(s)
+}
+
+// foobar now has students from the database!!
+
+---
+
+Q: When you're dealing with metadata, how do you detect the type?
+A: You have to import java.sql.Types;
+
+Then use stuff like this:
+if(metaData.getColumnType() == Types.VARCHAR)
+  System.out.printf("%-8s\t", resultSet.getString(i));
+else if(metaData.getColumnType() == Types.FLOAT)
+  System.out.printf("%-8$%.2f\t", resultSet.getString(i));
+else if(metaData.getColumnType() == Types.INTEGER)
+  System.out.printf("%-8d\t", resultSet.getInt(i));
+else
+  System.out.printf("%-8s\t", resultSet.getObject(i));
+
+---
+
+Q: What is meta data and when do you use it.
+A: Meta data is data about the data. You use it whenever she asks you to print a table or values where you don't know the column names or anything about the table. You can figure it out from the metadata.
+
+---
+
+Q: Create a salesman table with the columns/fields: SalesmanID, FirstName, LastName, DateHired
+A:
+CREATE TABLE Salesmen
+(
+  SalesmanID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  FirstName varchar(30) not null,
+  LastName varchar(30) not null,
+  DateHired date NOT NULL
+);
+
+---
+
+Q: How do you create a database called sales, how do you use it? how do you drop it?
+A: CREATE DATABASE SALES;
+use sales;
+drop database if exists sales;
+
+---
+
+
+Q: What's the difference between
+import java.sql.ResultSet; // this 
+import java.sql.ResultSetMetaData; // vs this
+
+A:
+ResultSet is returned when you're getting data back from the database. Queries like, give me all the people with firstname bob.
+It would return a list of people.
+
+ResultSetMetaData is taken from the ResultSet like this
+ResultSetMetaData metaData = resultSet.getMetaData();
+
+it has information with things like how many rows the query found, the names of the columns and the types of data found.
+It returns data about the data.
+
+---
+
+Q: How do you run things using the mysql connector?
+A:
+java -cp .;mysql-connector-blahblah.jar DisplayAuthors
+
+---
+
+Q: What are the advantages of PreparedStatements?
+A: They are faster, more secure and reusable.
+
+---
+
+Q: 
+1) 
+I want two tables in a database called University
+
+table 1: University which contains university name and universityCode
+table 1: Student which contains student name and studentID
+
+2)
+Add a university called UTArlington with code 12345.
+Add a student Jones with id 101
+
+3) Write the Java statement(s) that insert UT Dallas, 68123  into the University table, with and without the PreparedStatements.
+
+4)  Write the Java statement(s) that update Jones to Smith, with and without the PreparedStatements.
+
+5)  Write the Java code that will print to the prompt, the information in the University table with column headings.  Use getObject and then use the specific type of the data for accessing the resultset.  Then use the column headings to access the data.
+
+A:
+
+1)
+CREATE DATABASE University;
+use University;
+
+CREATE TABLE University (
+  universityName varchar(50),
+  universityCode int
+)
+CREATE TABLE Student (
+  studentName varchar(50),
+  studentID int
+)
+
+2) 
+INSERT INTO University (universityName, universityCode) VALUES ('UTArlington', 12345);
+INSERT INTO Student (studentName, studentID) VALUES (Jones', 101);
+
+3) 
+//WITH PREPARED
+PreparedStatement prepared
+   = connection.prepareStatement("INSERT INTO University (universityName, universityCode) VALUES ('UTDallas', 68123)");
+int x = prepared.executeUpdate();
+
+//WITHOUT PREPARED
+Statement statement = connection.createStatement();
+int x = statement.executeUpdate("INSERT INTO University (universityName, universityCode) VALUES ('UTDallas', 68123)");
+
+4)
+// WITH PREPARED STATEMENTS
+PreparedStatement updateJonesToSmith
+   = connection.prepareStatement("update Student set studentName = 'Smith' where studentName = 'Jones'");
+int x = updateJonesToSmith.executeUpdate();
+
+// WITHOUT PREPARED STATEMENTS
+Statement statement = connection.createStatement();
+int x = statement.executeUpdate("update Student set studentName = 'Smith' where studentName = 'Jones'");
+
+5)
+  resultSet = statement.executeQuery("SELECT * FROM University");
+  ResultSetMetaData metaData = resultSet.getMetaData();
+  int numberOfColumns = metaData.getColumnCount();
+  System.out.println("TABLE: " + table);
+  // COLUMN OF THE RESULT SET START AT 0 NOT 1.
+  for (int i = 1; i <= numberOfColumns; i++)
+  {
+    System.out.printf("%-30s\t", metaData.getColumnName(i));
+  }
+  while(resultSet.next())
+  {
+    metaData = resultSet.getMetaData();
+    for (int i=1; i<numberOfColumns; i++)
+    {
+      // to use this you need  java.sql.Types;
+      if(metaData.getColumnType() == Types.VARCHAR)
+        System.out.printf("%-30s\t", resultSet.getString(i));
+      else if(metaData.getColumnType() == Types.FLOAT)
+        System.out.printf("%-30$%.2f\t", resultSet.getString(i));
+      else if(metaData.getColumnType() == Types.INTEGER)
+        System.out.printf("%-30d\t", resultSet.getInt(i));
+      else
+        System.out.printf("%-30s\t", resultSet.getObject(i));
+    }
+  }
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
